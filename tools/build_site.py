@@ -2,7 +2,7 @@ import os
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 import json,re,os,hashlib
 os.chdir(ROOT); os.makedirs('public',exist_ok=True); os.makedirs('dist',exist_ok=True)
-data=open('data/juan1.json').read()
+data=open('data/all.json').read()
 t=open('src/template.html').read()
 assert '/*__DATA__*/null' in t
 page=t.replace('/*__DATA__*/null',data)

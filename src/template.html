@@ -1,6 +1,6 @@
 <title>传习录白话译注</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="王阳明《传习录》卷上 129 条：原文校勘、白话、注释、反方驳论、自测复习，手机离线可读。">
+<meta name="description" content="王阳明《传习录》卷上 129 条、卷下 143 条：原文校勘、白话、注释、反方驳论、自测复习，手机离线可读。">
 <meta name="theme-color" content="#E9ECE6">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -159,7 +159,7 @@ mark{background:var(--zhu-soft);color:var(--zhu);border-radius:2px;padding:0 1px
 
 <div class="wrap">
   <header class="bar">
-    <a class="brand" href="#home"><span class="seal">传</span>传习录 · 卷上</a>
+    <a class="brand" href="#home"><span class="seal">传</span>传习录</a>
     <a class="ibtn" href="#toc" aria-label="目录" style="display:grid;place-items:center;text-decoration:none">目录</a>
     <a class="ibtn" href="#search" aria-label="搜索" style="display:grid;place-items:center;text-decoration:none">搜索</a>
     <button class="ibtn" id="setBtn" aria-expanded="false" aria-controls="setPanel">Aa</button>
@@ -176,7 +176,10 @@ mark{background:var(--zhu-soft);color:var(--zhu);border-radius:2px;padding:0 1px
 <script>
 const D = /*__DATA__*/null;
 const E = D.entries, BYN = {}; E.forEach(e=>BYN[e.n]=e);
-const RECS = [['徐爱录',1,14],['陆澄录',15,94],['薛侃录',95,129]];
+const RECS = [['卷上','徐爱录',1,14],['卷上','陆澄录',15,94],['卷上','薛侃录',95,129],['卷下','陈九川录',201,221],['卷下','黄直录',222,236],['卷下','黄修易录',237,247],['卷下','黄省曾、钱德洪录',248,316],['卷下','黄以方录',317,343]];
+const JUAN = [['卷上','徐爱、陆澄、薛侃录',1,129],['卷下','陈九川、黄直、黄修易、黄省曾、钱德洪、黄以方录',201,343]];
+const IDX = {}; E.forEach((e,i)=>IDX[e.n]=i);
+const TOTAL = E.length;
 const KEY = new Set(E.filter(e=>e.con).map(e=>e.n));
 const DAY = 864e5, IV=[1,3,7,16,35,90];
 const $ = s=>document.querySelector(s);
@@ -209,7 +212,7 @@ $('#setBtn').addEventListener('click',()=>{const p=$('#setPanel');p.hidden=!p.hi
 
 /* —— 渲染工具 —— */
 const paras = s=>s.split('\n').filter(Boolean).map(p=>'<p>'+esc(p).replace(/【(.+?)】/g,'<b>【$1】</b>')+'</p>').join('');
-function recOf(n){return RECS.find(r=>n>=r[1]&&n<=r[2])[0]}
+function recOf(n){const r=RECS.find(r=>n>=r[2]&&n<=r[3]);return r[0]+' · '+r[1]}
 function snippet(e,len=34){return e.yw.replace(/\s/g,'').slice(0,len)+'…'}
 function kjHtml(kj){
   if(!kj||!kj.length) return '<p class="muted" style="margin:0;font-size:.88rem">本条与底本逐字一致。</p>';
@@ -228,35 +231,36 @@ function vHome(){
   const next=E.filter(e=>!P[e.n]).slice(0,3).map(e=>e.n);
   const pct=Math.round(read/E.length*100);
   return `<section class="hero">
-    <div class="eyebrow">王守仁 撰 · 门人徐爱、陆澄、薛侃 录</div>
+    <div class="eyebrow">王守仁 撰 · 门人徐爱、钱德洪等 录</div>
     <h1>知是行之始，<br>行是知之成。</h1>
-    <p>卷上一百二十九条，每条附校勘、白话、注释和一句「今天怎么用」。每天读三条，四十三天读完。</p>
-    <div class="meter"><span class="muted" style="font-size:.85rem">已读</span><span class="track"><i style="width:${pct}%"></i></span><span>${read} / ${E.length}</span></div>
+    <p>卷上一百二十九条、卷下一百四十三条，每条附校勘、白话、注释和一句「今天怎么用」。每天读三条，三个月读完。</p>
+    <div class="meter"><span class="muted" style="font-size:.85rem">已读</span><span class="track"><i style="width:${pct}%"></i></span><span>${read} / ${TOTAL}</span></div>
   </section>
-  <section class="sec"><h2>今日三条 <small>${next.length?'从第 '+next[0]+' 条接着读':'卷上已读完'}</small></h2>
-    <div class="today">${next.length?next.map(n=>card(n,KEY.has(n)?'<span class="pill">有反方</span>':'')).join(''):'<p class="muted">一百二十九条都读过了。去复习，或者等卷下上线。</p>'}</div>
+  <section class="sec"><h2>今日三条 <small>${next.length?'从第 '+next[0]+' 条接着读':'全部读完'}</small></h2>
+    <div class="today">${next.length?next.map(n=>card(n,KEY.has(n)?'<span class="pill">有反方</span>':'')).join(''):'<p class="muted">卷上、卷下都读过了。去复习，或者等卷中上线。</p>'}</div>
   </section>
   <section class="sec"><h2>到期复习 <small>${due.length?due.length+' 条':'今天没有'}</small></h2>
     ${due.length?`<div class="today">${due.slice(0,3).map(n=>card(n,'<span class="pill due">待复习</span>')).join('')}</div><div class="btnrow" style="margin-top:12px"><a class="btn" href="#review">开始复习 ${due.length} 条</a></div>`
       :`<p class="muted" style="margin:0">读完一条点「读完了」，它会在 1、3、7、16、35 天后回来考你一次。</p>`}
   </section>
-  <section class="sec"><h2>卷首</h2><div class="today">
+  <section class="sec"><h2>序跋</h2><div class="today">
     <a class="card" href="#intro"><span class="no">序</span><span class="tt"><b>徐爱引言</b><span>先生于《大学》格物诸说，悉以旧本为正…</span></span></a>
     <a class="card" href="#ba"><span class="no">跋</span><span class="tt"><b>徐爱跋</b><span>爱因旧说汩没，始闻先生之教…</span></span></a>
+    <a class="card" href="#qba"><span class="no">跋</span><span class="tt"><b>钱德洪跋（卷下）</b><span>嘉靖戊子冬，德洪与王汝中奔师丧至广信…</span></span></a>
   </div></section>`;
 }
 function vToc(){
-  return `<section class="sec"><h2>目录 <small>卷上 · 一百二十九条</small></h2>
-  ${RECS.map(([name,a,b])=>`<div class="rec"><h3>${name} <span class="muted" style="font-size:.85rem">第 ${a}–${b} 条</span></h3><div class="grid">${
+  return JUAN.map(([jn,who,ja,jb])=>`<section class="sec"><h2>${jn} <small>${who} · ${E.filter(e=>e.n>=ja&&e.n<=jb).length} 条</small></h2>
+  ${RECS.filter(r=>r[0]===jn).map(([j,name,a,b])=>`<div class="rec"><h3>${name} <span class="muted" style="font-size:.85rem">第 ${a}–${b} 条</span></h3><div class="grid">${
     E.filter(e=>e.n>=a&&e.n<=b).map(e=>`<a class="cell${P[e.n]?' read':''}${KEY.has(e.n)?' key':''}" href="#e${e.n}" title="${esc(e.t)}">${e.n}</a>`).join('')
-  }</div></div>`).join('')}
-  <div class="legend"><span><i style="background:var(--qing-soft)"></i>已读</span><span><i style="background:var(--zhu);border-radius:50%;width:7px;height:7px"></i>附反方驳论</span></div></section>`;
+  }</div></div>`).join('')}</section>`).join('')+
+  `<div class="legend"><span><i style="background:var(--qing-soft)"></i>已读</span><span><i style="background:var(--zhu);border-radius:50%;width:7px;height:7px"></i>附反方驳论</span><span>编号依陈荣捷《详注集评》，卷中（第 130–200 条）尚未收录</span></div>`;
 }
 function vEntry(n){
   const e=BYN[n]; if(!e) return vHome();
-  const pv=BYN[n-1], nx=BYN[n+1], r=P[n];
+  const pv=E[IDX[n]-1], nx=E[IDX[n]+1], r=P[n];
   return `<article class="leaf">
-    <div class="eyebrow">${recOf(n)} · 第 ${n} 条 / 129</div>
+    <div class="eyebrow">${recOf(n)} · 第 ${n} 条</div>
     <div class="ehead"><span class="big">${n}</span><h1>${esc(e.t)}</h1>${r?'<span class="stamp">已读</span>':''}</div>
     <div class="yw">${paras(e.yw)}</div>
     <section class="blk bhblk"><h2>白话</h2><div class="bh">${paras(e.bh)}</div></section>
@@ -269,17 +273,21 @@ function vEntry(n){
     <section class="blk kj"><h2>校勘</h2><details class="kjd"${e.kj.length?'':' open'}><summary>与底本相比改动 ${e.kj.length} 处</summary><div style="margin-top:8px">${kjHtml(e.kj)}</div></details></section>
     <div class="actions">${r?`<button class="btn ghost" id="unread">取消已读</button><span class="muted" style="font-size:.85rem">下次复习：${new Date(r.d).toLocaleDateString('zh-CN')}</span>`:`<button class="btn" id="read">读完了</button>`}</div>
   </article>
-  <nav class="pager">${pv?`<a href="#e${pv.n}">← ${pv.n} ${esc(pv.t)}</a>`:'<a href="#ba">← 徐爱跋</a>'}${nx?`<a href="#e${nx.n}" style="text-align:right">${nx.n} ${esc(nx.t)} →</a>`:'<span></span>'}</nav>`;
+  <nav class="pager">${pv?`<a href="#e${pv.n}">← ${pv.n} ${esc(pv.t)}</a>`:'<a href="#ba">← 徐爱跋</a>'}${nx?`<a href="#e${nx.n}" style="text-align:right">${nx.n} ${esc(nx.t)} →</a>`:'<a href="#qba" style="text-align:right">钱德洪跋 →</a>'}</nav>`;
 }
 function vFront(k){
-  const f=D.front[k];
-  return `<article class="leaf"><div class="eyebrow">卷首</div><div class="ehead"><h1>${esc(f.title)}</h1></div>
+  const f=k==='qba'?D.back:D.front[k];
+  const label=k==='qba'?'卷下 · 跋':'卷上 · 卷首';
+  const pager=k==='intro'?'<span></span><a href="#ba" style="text-align:right">徐爱跋 →</a>'
+    :k==='ba'?'<a href="#intro">← 徐爱引言</a><a href="#e1" style="text-align:right">1 亲民还是新民 →</a>'
+    :'<a href="#e343">← 343 '+esc(BYN[343].t)+'</a><a href="#toc" style="text-align:right">回目录 →</a>';
+  return `<article class="leaf"><div class="eyebrow">${label}</div><div class="ehead"><h1>${esc(f.title)}</h1></div>
     <div class="yw">${paras(f.yw)}</div>
     <section class="blk bhblk"><h2>白话</h2><div class="bh">${paras(f.bh)}</div></section>
     ${S.bh==='0'?`<div class="actions"><button class="btn ghost" id="showBh">看白话</button></div>`:''}
     <section class="blk"><h2>注释</h2><ul class="zs">${f.zs.map(([a,b])=>`<li><span class="k">${esc(a)}</span><span class="v">${esc(b)}</span></li>`).join('')}</ul></section>
     <section class="blk kj"><h2>校勘</h2><details class="kjd"><summary>与底本相比改动 ${f.kj.length} 处</summary><div style="margin-top:8px">${kjHtml(f.kj)}</div></details></section>
-  </article><nav class="pager">${k==='intro'?'<span></span><a href="#ba" style="text-align:right">徐爱跋 →</a>':'<a href="#intro">← 徐爱引言</a><a href="#e1" style="text-align:right">1 亲民还是新民 →</a>'}</nav>`;
+  </article><nav class="pager">${pager}</nav>`;
 }
 let lastQ = load('q','');
 function vSearch(){
@@ -291,7 +299,7 @@ function vSearch(){
 function doSearch(q){
   lastQ=q; save('q',q);
   const box=$('#res'); if(!box) return;
-  q=q.trim(); if(!q){box.innerHTML='<p class="muted">共 129 条可搜。</p>';return}
+  q=q.trim(); if(!q){box.innerHTML='<p class="muted">共 '+TOTAL+' 条可搜。</p>';return}
   const hits=[];
   for(const e of E){
     const zs=(e.zs||[]).map(z=>z.join('：')).join('；');
@@ -315,25 +323,23 @@ function vReview(){
   </div>`;
 }
 function vAbout(){
-  const kjT=D.kjTotal;
+  const J=D.kjByJuan;
   return `<section class="sec prose"><h2>关于这个译注本</h2>
-  <p>这是王阳明《传习录》卷上的白话译注阅读站，包括徐爱引言、徐爱跋和正文 129 条，按陈荣捷《王阳明传习录详注集评》的编号排列。</p>
+  <p>这是王阳明《传习录》的白话译注阅读站，目前收录卷上（徐爱引言、徐爱跋、正文 129 条）和卷下（正文 143 条、钱德洪跋），共 ${TOTAL} 条。条目编号依陈荣捷《王阳明传习录详注集评》：卷上 1–129，卷下 201–343。卷中是阳明的书信（第 130–200 条），尚未收录。</p>
   <h2>底本与校勘</h2>
-  <p>原文取自殆知阁古籍库的公版电子文本。这个底本是 OCR 识读的，错字很多，例如「心即理也」被识成「心即埋也」，「伏羲画卦」成了「伏义昼卦」。整理时依通行本逐条改正，全卷共改 ${kjT} 处。</p>
+  <p>原文取自殆知阁古籍库的公版电子文本。这个底本是 OCR 识读的，错字很多，卷下尤其严重，例如「良知」常被识成「真知」，「麈尾」成了「尘尾」，「癸未」成了「癸末」。整理时依通行本逐条改正，卷上改 ${J['上']} 处，卷下改 ${J['下']} 处。</p>
   <p>每一处改动都是程序把成稿和底本逐字比对后自动列出的，挂在每条末尾的「校勘」里，没有不留记录的改动。比对只看汉字，不计标点。</p>
+  <p>卷下的分条与通行本有两处不同，已按陈荣捷编号调整：底本把第 228、229 两条连成一条，中间以「○」隔开，这里拆开；底本把钱德洪记阳明在越讲学盛况的一段当作序文，这里按通行本列为第 316 条。另外，底本没有标出钱德洪录的起点，所以目录里把第 248–316 条合称「黄省曾、钱德洪录」；第 317–343 条底本也未标录者，据通行本定为黄以方录。</p>
   <p>校改依据的是整理者对通行本的了解，没有逐字对照纸本。如果要引用，请用陈荣捷《详注集评》或邓艾民《传习录注疏》核对。</p>
   <h2>白话、注释和反方</h2>
-  <p>白话以直译为主，个别长条（如第 11 条）分段意译。注释说明人名、典故和术语。「反方怎么驳」选了 ${KEY.size} 条争议较大的条目，列出朱子学者、清代考据家或现代心理学可能提出的质疑，好让你读的时候不只是点头。</p>
+  <p>白话以直译为主，个别长条分段意译。注释说明人名、典故和术语。「反方怎么驳」选了 ${KEY.size} 条争议较大的条目，列出朱子学者、清代考据家、东林学者或现代心理学可能提出的质疑，好让你读的时候不只是点头。</p>
   <p>白话、注释、反方、自测题和「今天怎么用」都由 AI 撰写，不是出版译本。</p>
   <h2>阅读进度保存在哪</h2>
   <p>已读记录、复习日程和设置只存在这台设备的浏览器里，不上传。电脑和手机的进度不相通；清除浏览器数据会丢失进度。</p>
   <h2>离线阅读</h2>
   <p>部署到自己的域名后，第一次打开会把全书缓存下来，之后没网也能打开。手机浏览器里选「添加到主屏幕」，用起来就像一个 App。</p>
-  <h2>接下来</h2>
-  <p>卷下（陈九川、黄直、黄修易、黄省曾、钱德洪等录）和卷中（书信）会按同样体例陆续加入。</p>
   </section>`;
 }
-
 /* —— 路由 —— */
 function route(){
   const h=(location.hash||'#home').slice(1);
@@ -343,7 +349,7 @@ function route(){
   else if(h==='search') html=vSearch();
   else if(h==='review') html=vReview();
   else if(h==='about') html=vAbout();
-  else if(h==='intro'||h==='ba') html=vFront(h);
+  else if(h==='intro'||h==='ba'||h==='qba') html=vFront(h);
   else html=vHome();
   $('#app').innerHTML=html;
   if(h!=='review'){rvQueue=[];rvShow=false}
@@ -370,8 +376,9 @@ document.addEventListener('keydown',ev=>{
   if(ev.target.closest('input,textarea')) return;
   const m=(location.hash||'').match(/^#e(\d+)$/); if(!m) return;
   const n=+m[1];
-  if(ev.key==='ArrowRight'&&BYN[n+1]) location.hash='e'+(n+1);
-  if(ev.key==='ArrowLeft'&&BYN[n-1]) location.hash='e'+(n-1);
+  const i=IDX[n];
+  if(ev.key==='ArrowRight'&&E[i+1]) location.hash='e'+E[i+1].n;
+  if(ev.key==='ArrowLeft'&&E[i-1]) location.hash='e'+E[i-1].n;
 });
 window.addEventListener('hashchange',route);
 applySettings();

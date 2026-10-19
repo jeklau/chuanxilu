@@ -1,5 +1,5 @@
 // 传习录离线缓存：页面和图标先缓存，字体用到时再存
-const V='cxl-edbdddff';
+const V='cxl-d426c66d';
 const CORE=['./','index.html','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
