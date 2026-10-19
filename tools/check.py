@@ -5,6 +5,7 @@ raw=json.load(open(ROOT+'/data/juan1_raw.json'))
 R={e['n']:e['text'] for e in raw['entries']}
 try:
     R.update({e['n']:e['text'] for e in json.load(open(ROOT+'/data/juan3_raw_n.json'))['entries']})
+    R.update({e['n']:e['text'] for e in json.load(open(ROOT+'/data/juan2_raw.json'))['entries']})
 except FileNotFoundError: pass
 han=lambda s:''.join(c for c in s if '一'<=c<='鿿' or '㐀'<=c<='䶿')
 def diff(a,b):

@@ -1,6 +1,6 @@
 <title>传习录白话译注</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="王阳明《传习录》卷上 129 条、卷下 143 条：原文校勘、白话、注释、反方驳论、自测复习，手机离线可读。">
+<meta name="description" content="王阳明《传习录》全本 343 条（卷上、卷中、卷下）：原文校勘、白话、注释、反方驳论、自测复习，手机离线可读。">
 <meta name="theme-color" content="#E9ECE6">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -176,8 +176,8 @@ mark{background:var(--zhu-soft);color:var(--zhu);border-radius:2px;padding:0 1px
 <script>
 const D = /*__DATA__*/null;
 const E = D.entries, BYN = {}; E.forEach(e=>BYN[e.n]=e);
-const RECS = [['卷上','徐爱录',1,14],['卷上','陆澄录',15,94],['卷上','薛侃录',95,129],['卷下','陈九川录',201,221],['卷下','黄直录',222,236],['卷下','黄修易录',237,247],['卷下','黄省曾、钱德洪录',248,316],['卷下','黄以方录',317,343]];
-const JUAN = [['卷上','徐爱、陆澄、薛侃录',1,129],['卷下','陈九川、黄直、黄修易、黄省曾、钱德洪、黄以方录',201,343]];
+const RECS = [['卷上','徐爱录',1,14],['卷上','陆澄录',15,94],['卷上','薛侃录',95,129],['卷中','答顾东桥书',130,143],['卷中','答周道通书',144,150],['卷中','答陆原静书',151,167],['卷中','答欧阳崇一',168,171],['卷中','答罗整庵少宰书',172,177],['卷中','答聂文蔚',178,194],['卷中','训蒙大意',195,195],['卷中','教约',196,200],['卷下','陈九川录',201,221],['卷下','黄直录',222,236],['卷下','黄修易录',237,247],['卷下','黄省曾、钱德洪录',248,316],['卷下','黄以方录',317,343]];
+const JUAN = [['卷上','徐爱、陆澄、薛侃录',1,129],['卷中','阳明书信与教约',130,200],['卷下','陈九川、黄直、黄修易、黄省曾、钱德洪、黄以方录',201,343]];
 const IDX = {}; E.forEach((e,i)=>IDX[e.n]=i);
 const TOTAL = E.length;
 const KEY = new Set(E.filter(e=>e.con).map(e=>e.n));
@@ -233,11 +233,11 @@ function vHome(){
   return `<section class="hero">
     <div class="eyebrow">王守仁 撰 · 门人徐爱、钱德洪等 录</div>
     <h1>知是行之始，<br>行是知之成。</h1>
-    <p>卷上一百二十九条、卷下一百四十三条，每条附校勘、白话、注释和一句「今天怎么用」。每天读三条，三个月读完。</p>
+    <p>全本三百四十三条：卷上语录、卷中书信、卷下语录，每条附校勘、白话、注释和一句「今天怎么用」。每天读三条，四个月读完。</p>
     <div class="meter"><span class="muted" style="font-size:.85rem">已读</span><span class="track"><i style="width:${pct}%"></i></span><span>${read} / ${TOTAL}</span></div>
   </section>
   <section class="sec"><h2>今日三条 <small>${next.length?'从第 '+next[0]+' 条接着读':'全部读完'}</small></h2>
-    <div class="today">${next.length?next.map(n=>card(n,KEY.has(n)?'<span class="pill">有反方</span>':'')).join(''):'<p class="muted">卷上、卷下都读过了。去复习，或者等卷中上线。</p>'}</div>
+    <div class="today">${next.length?next.map(n=>card(n,KEY.has(n)?'<span class="pill">有反方</span>':'')).join(''):'<p class="muted">全书三百四十三条都读过了。去复习吧。</p>'}</div>
   </section>
   <section class="sec"><h2>到期复习 <small>${due.length?due.length+' 条':'今天没有'}</small></h2>
     ${due.length?`<div class="today">${due.slice(0,3).map(n=>card(n,'<span class="pill due">待复习</span>')).join('')}</div><div class="btnrow" style="margin-top:12px"><a class="btn" href="#review">开始复习 ${due.length} 条</a></div>`
@@ -246,15 +246,17 @@ function vHome(){
   <section class="sec"><h2>序跋</h2><div class="today">
     <a class="card" href="#intro"><span class="no">序</span><span class="tt"><b>徐爱引言</b><span>先生于《大学》格物诸说，悉以旧本为正…</span></span></a>
     <a class="card" href="#ba"><span class="no">跋</span><span class="tt"><b>徐爱跋</b><span>爱因旧说汩没，始闻先生之教…</span></span></a>
+    <a class="card" href="#zxu"><span class="no">序</span><span class="tt"><b>钱德洪序（卷中）</b><span>昔南元善刻《传习录》于越，凡二册…</span></span></a>
+    <a class="card" href="#yjba"><span class="no">按</span><span class="tt"><b>钱德洪按（答原静书后）</b><span>答原静书出，读者皆喜澄善问，师善答…</span></span></a>
     <a class="card" href="#qba"><span class="no">跋</span><span class="tt"><b>钱德洪跋（卷下）</b><span>嘉靖戊子冬，德洪与王汝中奔师丧至广信…</span></span></a>
   </div></section>`;
 }
 function vToc(){
-  return JUAN.map(([jn,who,ja,jb])=>`<section class="sec"><h2>${jn} <small>${who} · ${E.filter(e=>e.n>=ja&&e.n<=jb).length} 条</small></h2>
+  return JUAN.map(([jn,who,ja,jb])=>`<section class="sec"><h2>${jn} <small>${who} · ${E.filter(e=>e.n>=ja&&e.n<=jb).length} 条</small></h2>${jn==='卷中'?'<p class="muted" style="margin:0;font-size:.88rem"><a href="#zxu">钱德洪序</a> · <a href="#yjba">答原静书后按语</a></p>':jn==='卷上'?'<p class="muted" style="margin:0;font-size:.88rem"><a href="#intro">徐爱引言</a> · <a href="#ba">徐爱跋</a></p>':'<p class="muted" style="margin:0;font-size:.88rem"><a href="#qba">钱德洪跋</a></p>'}
   ${RECS.filter(r=>r[0]===jn).map(([j,name,a,b])=>`<div class="rec"><h3>${name} <span class="muted" style="font-size:.85rem">第 ${a}–${b} 条</span></h3><div class="grid">${
     E.filter(e=>e.n>=a&&e.n<=b).map(e=>`<a class="cell${P[e.n]?' read':''}${KEY.has(e.n)?' key':''}" href="#e${e.n}" title="${esc(e.t)}">${e.n}</a>`).join('')
   }</div></div>`).join('')}</section>`).join('')+
-  `<div class="legend"><span><i style="background:var(--qing-soft)"></i>已读</span><span><i style="background:var(--zhu);border-radius:50%;width:7px;height:7px"></i>附反方驳论</span><span>编号依陈荣捷《详注集评》，卷中（第 130–200 条）尚未收录</span></div>`;
+  `<div class="legend"><span><i style="background:var(--qing-soft)"></i>已读</span><span><i style="background:var(--zhu);border-radius:50%;width:7px;height:7px"></i>附反方驳论</span><span>编号依陈荣捷《详注集评》</span></div>`;
 }
 function vEntry(n){
   const e=BYN[n]; if(!e) return vHome();
@@ -276,10 +278,12 @@ function vEntry(n){
   <nav class="pager">${pv?`<a href="#e${pv.n}">← ${pv.n} ${esc(pv.t)}</a>`:'<a href="#ba">← 徐爱跋</a>'}${nx?`<a href="#e${nx.n}" style="text-align:right">${nx.n} ${esc(nx.t)} →</a>`:'<a href="#qba" style="text-align:right">钱德洪跋 →</a>'}</nav>`;
 }
 function vFront(k){
-  const f=k==='qba'?D.back:D.front[k];
-  const label=k==='qba'?'卷下 · 跋':'卷上 · 卷首';
+  const f=k==='qba'?D.back:k==='zxu'?D.front2:k==='yjba'?D.note:D.front[k];
+  const label={qba:'卷下 · 跋',zxu:'卷中 · 序',yjba:'卷中 · 答陆原静书后'}[k]||'卷上 · 卷首';
   const pager=k==='intro'?'<span></span><a href="#ba" style="text-align:right">徐爱跋 →</a>'
     :k==='ba'?'<a href="#intro">← 徐爱引言</a><a href="#e1" style="text-align:right">1 亲民还是新民 →</a>'
+    :k==='zxu'?'<a href="#e129">← 129 '+esc(BYN[129].t)+'</a><a href="#e130" style="text-align:right">130 '+esc(BYN[130].t)+' →</a>'
+    :k==='yjba'?'<a href="#e167">← 167 '+esc(BYN[167].t)+'</a><a href="#e168" style="text-align:right">168 '+esc(BYN[168].t)+' →</a>'
     :'<a href="#e343">← 343 '+esc(BYN[343].t)+'</a><a href="#toc" style="text-align:right">回目录 →</a>';
   return `<article class="leaf"><div class="eyebrow">${label}</div><div class="ehead"><h1>${esc(f.title)}</h1></div>
     <div class="yw">${paras(f.yw)}</div>
@@ -325,14 +329,14 @@ function vReview(){
 function vAbout(){
   const J=D.kjByJuan;
   return `<section class="sec prose"><h2>关于这个译注本</h2>
-  <p>这是王阳明《传习录》的白话译注阅读站，目前收录卷上（徐爱引言、徐爱跋、正文 129 条）和卷下（正文 143 条、钱德洪跋），共 ${TOTAL} 条。条目编号依陈荣捷《王阳明传习录详注集评》：卷上 1–129，卷下 201–343。卷中是阳明的书信（第 130–200 条），尚未收录。</p>
+  <p>这是王阳明《传习录》全本的白话译注阅读站，共 ${TOTAL} 条：卷上语录 129 条（附徐爱引言、跋），卷中书信与教约 71 条（附钱德洪序、按语），卷下语录 143 条（附钱德洪跋）。条目编号依陈荣捷《王阳明传习录详注集评》：卷上 1–129，卷中 130–200，卷下 201–343。</p>
   <h2>底本与校勘</h2>
-  <p>原文取自殆知阁古籍库的公版电子文本。这个底本是 OCR 识读的，错字很多，卷下尤其严重，例如「良知」常被识成「真知」，「麈尾」成了「尘尾」，「癸未」成了「癸末」。整理时依通行本逐条改正，卷上改 ${J['上']} 处，卷下改 ${J['下']} 处。</p>
+  <p>原文取自殆知阁古籍库的公版电子文本。这个底本是 OCR 识读的，错字很多，例如「心即理也」被识成「心即埋也」，「良知」常被识成「真知」，「致知」成了「玫知」。整理时依通行本逐条改正：卷上改 ${J['上']} 处，卷中改 ${J['中']} 处，卷下改 ${J['下']} 处。</p>
   <p>每一处改动都是程序把成稿和底本逐字比对后自动列出的，挂在每条末尾的「校勘」里，没有不留记录的改动。比对只看汉字，不计标点。</p>
-  <p>卷下的分条与通行本有两处不同，已按陈荣捷编号调整：底本把第 228、229 两条连成一条，中间以「○」隔开，这里拆开；底本把钱德洪记阳明在越讲学盛况的一段当作序文，这里按通行本列为第 316 条。另外，底本没有标出钱德洪录的起点，所以目录里把第 248–316 条合称「黄省曾、钱德洪录」；第 317–343 条底本也未标录者，据通行本定为黄以方录。</p>
+  <p>分条与通行本不同的地方，已按陈荣捷编号调整：卷中底本把第 179、180 两条连成一条，卷下底本把第 228、229 两条连成一条，中间都以「○」隔开，这里拆开；卷下底本把钱德洪记阳明在越讲学盛况的一段当作序文，这里按通行本列为第 316 条。卷下底本没有标出钱德洪录的起点，所以目录把第 248–316 条合称「黄省曾、钱德洪录」；第 317–343 条据通行本定为黄以方录。</p>
   <p>校改依据的是整理者对通行本的了解，没有逐字对照纸本。如果要引用，请用陈荣捷《详注集评》或邓艾民《传习录注疏》核对。</p>
   <h2>白话、注释和反方</h2>
-  <p>白话以直译为主，个别长条分段意译。注释说明人名、典故和术语。「反方怎么驳」选了 ${KEY.size} 条争议较大的条目，列出朱子学者、清代考据家、东林学者或现代心理学可能提出的质疑，好让你读的时候不只是点头。</p>
+  <p>白话以直译为主，长条（卷中书信尤多）分段意译并加小标题。注释说明人名、典故和术语。「反方怎么驳」选了 ${KEY.size} 条争议较大的条目，列出朱子学者、清代考据家、东林学者或现代心理学可能提出的质疑，好让你读的时候不只是点头。</p>
   <p>白话、注释、反方、自测题和「今天怎么用」都由 AI 撰写，不是出版译本。</p>
   <h2>阅读进度保存在哪</h2>
   <p>已读记录、复习日程和设置只存在这台设备的浏览器里，不上传。电脑和手机的进度不相通；清除浏览器数据会丢失进度。</p>
@@ -349,7 +353,7 @@ function route(){
   else if(h==='search') html=vSearch();
   else if(h==='review') html=vReview();
   else if(h==='about') html=vAbout();
-  else if(h==='intro'||h==='ba'||h==='qba') html=vFront(h);
+  else if(['intro','ba','qba','zxu','yjba'].includes(h)) html=vFront(h);
   else html=vHome();
   $('#app').innerHTML=html;
   if(h!=='review'){rvQueue=[];rvShow=false}
