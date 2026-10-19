@@ -1,0 +1,381 @@
+<title>传习录白话译注</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="王阳明《传习录》卷上 129 条：原文校勘、白话、注释、反方驳论、自测复习，手机离线可读。">
+<meta name="theme-color" content="#E9ECE6">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap">
+<style>
+/* 版式：一栏书页，左缘留「书口」，原文用宋体大字，白话用无衬线小一号，像古籍的「经」与「疏」两层 */
+:root{
+  --paper:#E9ECE6;      /* 宣纸，略带青灰 */
+  --leaf:#F6F7F3;       /* 书页 */
+  --ink:#1D2320;        /* 墨 */
+  --ink-2:#4A544F;      /* 淡墨 */
+  --ink-3:#7C8681;      /* 枯墨 */
+  --rule:#CDD3CC;       /* 界栏 */
+  --qing:#2D6A64;       /* 石青，主色 */
+  --qing-soft:#DCE8E4;
+  --zhu:#B23A2C;        /* 朱，只用于印章与校勘 */
+  --zhu-soft:#F3E2DE;
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+  --sans:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --display:"ZCOOL XiaoWei","Noto Serif SC","Songti SC",serif;
+  --fs:17px;
+  --measure:36em;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#151917;--leaf:#1C211F;--ink:#E3E7E2;--ink-2:#B5BDB8;--ink-3:#85908A;--rule:#323A36;
+  --qing:#7FC1B7;--qing-soft:#203431;--zhu:#E2735F;--zhu-soft:#3A2521;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#151917;--leaf:#1C211F;--ink:#E3E7E2;--ink-2:#B5BDB8;--ink-3:#85908A;--rule:#323A36;
+  --qing:#7FC1B7;--qing-soft:#203431;--zhu:#E2735F;--zhu-soft:#3A2521;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font:var(--fs)/1.75 var(--sans);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:var(--qing)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--qing);outline-offset:2px;border-radius:4px}
+.wrap{max-width:46rem;margin:0 auto}
+
+/* 顶栏 */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);display:flex;align-items:center;gap:8px;padding-block:10px;border-bottom:1px solid var(--rule)}
+.brand{font-family:var(--display);font-size:1.25rem;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px;margin-right:auto;white-space:nowrap}
+.seal{display:inline-grid;place-items:center;width:1.6em;height:1.6em;background:var(--zhu);color:var(--leaf);font-family:var(--serif);font-weight:700;font-size:.8em;border-radius:3px}
+.ibtn{border:1px solid var(--rule);background:var(--leaf);border-radius:8px;min-width:40px;height:38px;padding:0 10px;cursor:pointer;font-size:.9rem;color:var(--ink-2)}
+.ibtn:hover{border-color:var(--qing);color:var(--qing)}
+.ibtn[aria-pressed="true"]{background:var(--qing);color:var(--leaf);border-color:var(--qing)}
+
+/* 设置面板 */
+.panel{background:var(--leaf);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;margin-top:10px;display:grid;gap:12px;font-size:.92rem}
+.panel .row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.panel .lab{color:var(--ink-3);width:4.5em;flex:none}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:6px 12px;cursor:pointer;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--qing);color:var(--leaf)}
+
+/* 通用 */
+h1,h2,h3{text-wrap:balance;font-weight:400}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;color:var(--ink-3)}
+.muted{color:var(--ink-3)}
+.sec{margin-top:28px}
+.sec>h2{font-family:var(--display);font-size:1.35rem;margin:0 0 12px;display:flex;align-items:baseline;gap:10px}
+.sec>h2 small{font-family:var(--sans);font-size:.8rem;color:var(--ink-3)}
+
+/* 首页 */
+.hero{padding-block:28px 6px}
+.hero h1{font-family:var(--display);font-size:clamp(2rem,7vw,2.8rem);line-height:1.2;margin:6px 0 10px}
+.hero p{margin:0;color:var(--ink-2);max-width:var(--measure)}
+.meter{margin-top:18px;display:flex;align-items:center;gap:12px;font-variant-numeric:tabular-nums}
+.track{flex:1;height:6px;background:var(--rule);border-radius:3px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--qing);border-radius:3px}
+.today{display:grid;gap:10px}
+.card{display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;align-items:center;text-decoration:none;color:inherit;background:var(--leaf);border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.card:hover{border-color:var(--qing)}
+.card .no{font-family:var(--serif);font-size:1.4rem;color:var(--qing);font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+.card .tt{min-width:0}
+.card .tt b{font-weight:600;display:block}
+.card .tt span{font-size:.85rem;color:var(--ink-3);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--serif)}
+.pill{font-size:.75rem;padding:2px 8px;border-radius:99px;background:var(--qing-soft);color:var(--qing);white-space:nowrap}
+.pill.due{background:var(--zhu-soft);color:var(--zhu)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--qing);background:var(--qing);color:var(--leaf);border-radius:8px;padding:8px 16px;cursor:pointer;text-decoration:none;font-size:.95rem}
+.btn.ghost{background:transparent;color:var(--qing)}
+.btn:disabled{opacity:.45;cursor:default}
+.btnrow{display:flex;flex-wrap:wrap;gap:10px}
+
+/* 目录 */
+.rec{margin-top:18px}
+.rec h3{font-family:var(--serif);font-size:1rem;margin:0 0 8px;color:var(--ink-2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(2.9rem,1fr));gap:6px}
+.cell{display:grid;place-items:center;height:2.6rem;border:1px solid var(--rule);border-radius:6px;background:var(--leaf);text-decoration:none;color:var(--ink-2);font-variant-numeric:tabular-nums;font-size:.9rem;position:relative}
+.cell:hover{border-color:var(--qing);color:var(--qing)}
+.cell.read{background:var(--qing-soft);color:var(--qing);border-color:transparent}
+.cell.key::after{content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;background:var(--zhu)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--ink-3);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:-1px;margin-right:4px}
+
+/* 条目页：书页 */
+.leaf{background:var(--leaf);border:1px solid var(--rule);border-radius:12px;margin-top:16px;padding:22px clamp(16px,4vw,36px) 26px}
+.ehead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ehead .big{font-family:var(--serif);font-size:2.4rem;line-height:1;color:var(--qing);font-variant-numeric:tabular-nums}
+.ehead h1{font-family:var(--display);font-size:1.6rem;margin:0;flex:1;min-width:10em}
+.stamp{font-family:var(--serif);font-size:.8rem;border:1.5px solid var(--zhu);color:var(--zhu);padding:1px 6px;border-radius:3px;transform:rotate(-4deg);display:inline-block}
+.yw{font-family:var(--serif);font-size:calc(var(--fs)*1.12);line-height:2.05;letter-spacing:.02em;margin:18px 0 0;max-width:var(--measure);text-align:justify}
+.yw p{margin:0 0 .6em}
+.blk{margin-top:22px;border-top:1px solid var(--rule);padding-top:14px}
+.blk>h2{font-size:.82rem;letter-spacing:.14em;color:var(--ink-3);margin:0 0 8px;font-weight:600;display:flex;align-items:center;gap:8px}
+.blk>h2::before{content:"";width:3px;height:.9em;background:var(--qing);border-radius:2px}
+.blk.con>h2::before,.blk.kj>h2::before{background:var(--zhu)}
+.bh{max-width:var(--measure);color:var(--ink)}
+.bh p{margin:0 0 .7em}
+.zs{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.zs li{display:grid;grid-template-columns:minmax(4.5em,max-content) 1fr;gap:4px 12px;font-size:.92rem}
+.zs dt,.zs .k{font-family:var(--serif);font-weight:600;color:var(--qing)}
+.zs .v{min-width:0;color:var(--ink-2)}
+.con .txt{background:var(--zhu-soft);border-radius:8px;padding:12px 14px;font-size:.95rem;color:var(--ink)}
+.yong{background:var(--qing-soft);border-radius:8px;padding:12px 14px;font-size:.95rem}
+.flip{border:1px dashed var(--qing);border-radius:10px;padding:14px;cursor:pointer;background:transparent;width:100%;text-align:left}
+.flip .q{font-weight:600}
+.flip .a{margin-top:8px;color:var(--ink-2)}
+.flip .hint{font-size:.8rem;color:var(--ink-3);margin-top:6px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{font-size:.88rem;text-decoration:none;border:1px solid var(--rule);border-radius:99px;padding:3px 10px;color:var(--ink-2)}
+.links a:hover{border-color:var(--qing);color:var(--qing)}
+.kjl{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:.88rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.kjl b{font-family:var(--serif);color:var(--zhu);font-weight:600}
+.kjl s{font-family:var(--serif);color:var(--ink-3)}
+details.kjd summary{cursor:pointer;color:var(--ink-3);font-size:.9rem}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+.pager a{text-decoration:none;color:var(--ink-2);font-size:.92rem;max-width:48%}
+.pager a:hover{color:var(--qing)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
+
+/* 搜索 */
+.search input{width:100%;font:inherit;padding:10px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--leaf);color:var(--ink)}
+.res{display:grid;gap:8px;margin-top:12px}
+.res a{display:block;text-decoration:none;color:inherit;background:var(--leaf);border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.res a:hover{border-color:var(--qing)}
+.res .snip{font-family:var(--serif);font-size:.92rem;color:var(--ink-2)}
+mark{background:var(--zhu-soft);color:var(--zhu);border-radius:2px;padding:0 1px}
+
+/* 复习 */
+.rv{background:var(--leaf);border:1px solid var(--rule);border-radius:12px;padding:20px;margin-top:16px}
+.rv .q{font-size:1.15rem;font-family:var(--serif);margin:10px 0 16px}
+.rv .a{border-top:1px solid var(--rule);padding-top:12px;margin-top:4px}
+
+.prose{max-width:var(--measure)}
+.prose h2{font-family:var(--display);font-size:1.3rem;margin:26px 0 8px}
+.prose p,.prose li{color:var(--ink-2)}
+.foot{margin-top:40px;font-size:.8rem;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:12px}
+.hide-bh .bhblk{display:none}
+@media (max-width:480px){.ehead .big{font-size:2rem}.zs li{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.leaf,.rv{animation:in .25s ease-out}@keyframes in{from{transform:translateY(4px)}to{transform:none}}}
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="brand" href="#home"><span class="seal">传</span>传习录 · 卷上</a>
+    <a class="ibtn" href="#toc" aria-label="目录" style="display:grid;place-items:center;text-decoration:none">目录</a>
+    <a class="ibtn" href="#search" aria-label="搜索" style="display:grid;place-items:center;text-decoration:none">搜索</a>
+    <button class="ibtn" id="setBtn" aria-expanded="false" aria-controls="setPanel">Aa</button>
+  </header>
+  <div class="panel" id="setPanel" hidden>
+    <div class="row"><span class="lab">字号</span><div class="seg" id="fsSeg"><button data-v="15">小</button><button data-v="17">中</button><button data-v="19">大</button><button data-v="21">特大</button></div></div>
+    <div class="row"><span class="lab">配色</span><div class="seg" id="thSeg"><button data-v="system">跟随系统</button><button data-v="light">日间</button><button data-v="dark">夜读</button></div></div>
+    <div class="row"><span class="lab">白话</span><div class="seg" id="bhSeg"><button data-v="1">显示</button><button data-v="0">先藏起来</button></div><span class="muted" style="font-size:.82rem">藏起来时，先读原文自己想，再点开白话。</span></div>
+  </div>
+  <main id="app"></main>
+  <div class="foot">底本：殆知阁古籍库公版《传习录》。编号依陈荣捷《王阳明传习录详注集评》。白话、注释、反方与自测题为 AI 撰写，并非出版译本，引用时请核对纸本。<a href="#about">关于本书</a></div>
+</div>
+
+<script>
+const D = /*__DATA__*/null;
+const E = D.entries, BYN = {}; E.forEach(e=>BYN[e.n]=e);
+const RECS = [['徐爱录',1,14],['陆澄录',15,94],['薛侃录',95,129]];
+const KEY = new Set(E.filter(e=>e.con).map(e=>e.n));
+const DAY = 864e5, IV=[1,3,7,16,35,90];
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* —— 本机存储（失败时退回内存） —— */
+const mem = {};
+function load(k,d){try{const v=localStorage.getItem('cxl:'+k);return v==null?d:JSON.parse(v)}catch(e){return k in mem?mem[k]:d}}
+function save(k,v){mem[k]=v;try{localStorage.setItem('cxl:'+k,JSON.stringify(v))}catch(e){}}
+let P = load('progress',{});   // n -> {r:readAt, b:box, d:due}
+let S = load('settings',{fs:17,th:'system',bh:'1'});
+const today0 = ()=>{const d=new Date();d.setHours(0,0,0,0);return +d};
+const isRead = n=>!!P[n];
+const dueList = ()=>E.filter(e=>P[e.n]&&P[e.n].d<=today0()+DAY-1).map(e=>e.n);
+function markRead(n){ if(!P[n]){P[n]={r:Date.now(),b:0,d:today0()+IV[0]*DAY}; save('progress',P);} }
+function unmark(n){ delete P[n]; save('progress',P); }
+function grade(n,ok){ const p=P[n]; if(!p) return; p.b = ok?Math.min(p.b+1,IV.length-1):0; p.d = today0()+IV[p.b]*DAY; save('progress',P); }
+
+/* —— 设置 —— */
+function applySettings(){
+  document.documentElement.style.setProperty('--fs',S.fs+'px');
+  if(S.th==='system') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme',S.th);
+  document.body.classList.toggle('hide-bh',S.bh==='0');
+  for(const [id,k] of [['#fsSeg','fs'],['#thSeg','th'],['#bhSeg','bh']])
+    document.querySelectorAll(id+' button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v==String(S[k]))));
+}
+for(const [id,k,num] of [['#fsSeg','fs',1],['#thSeg','th',0],['#bhSeg','bh',0]])
+  $(id).addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;S[k]=num?+b.dataset.v:b.dataset.v;save('settings',S);applySettings();});
+$('#setBtn').addEventListener('click',()=>{const p=$('#setPanel');p.hidden=!p.hidden;$('#setBtn').setAttribute('aria-expanded',String(!p.hidden));});
+
+/* —— 渲染工具 —— */
+const paras = s=>s.split('\n').filter(Boolean).map(p=>'<p>'+esc(p).replace(/【(.+?)】/g,'<b>【$1】</b>')+'</p>').join('');
+function recOf(n){return RECS.find(r=>n>=r[1]&&n<=r[2])[0]}
+function snippet(e,len=34){return e.yw.replace(/\s/g,'').slice(0,len)+'…'}
+function kjHtml(kj){
+  if(!kj||!kj.length) return '<p class="muted" style="margin:0;font-size:.88rem">本条与底本逐字一致。</p>';
+  return '<ul class="kjl">'+kj.map(([op,f,t,c])=>{
+    const ctx = c?`<span class="muted">（…${esc(c)}）</span>`:'';
+    if(op==='r') return `<li>底本作 <s>${esc(f)}</s>，今作 <b>${esc(t)}</b> ${ctx}</li>`;
+    if(op==='i') return `<li>底本脱，今补 <b>${esc(t)}</b> ${ctx}</li>`;
+    return `<li>底本衍 <s>${esc(f)}</s>，今删 ${ctx}</li>`;
+  }).join('')+'</ul>';
+}
+function card(n,extra=''){const e=BYN[n];return `<a class="card" href="#e${n}"><span class="no">${n}</span><span class="tt"><b>${esc(e.t)}</b><span>${esc(snippet(e))}</span></span>${extra}</a>`}
+
+/* —— 视图 —— */
+function vHome(){
+  const read=Object.keys(P).length, due=dueList();
+  const next=E.filter(e=>!P[e.n]).slice(0,3).map(e=>e.n);
+  const pct=Math.round(read/E.length*100);
+  return `<section class="hero">
+    <div class="eyebrow">王守仁 撰 · 门人徐爱、陆澄、薛侃 录</div>
+    <h1>知是行之始，<br>行是知之成。</h1>
+    <p>卷上一百二十九条，每条附校勘、白话、注释和一句「今天怎么用」。每天读三条，四十三天读完。</p>
+    <div class="meter"><span class="muted" style="font-size:.85rem">已读</span><span class="track"><i style="width:${pct}%"></i></span><span>${read} / ${E.length}</span></div>
+  </section>
+  <section class="sec"><h2>今日三条 <small>${next.length?'从第 '+next[0]+' 条接着读':'卷上已读完'}</small></h2>
+    <div class="today">${next.length?next.map(n=>card(n,KEY.has(n)?'<span class="pill">有反方</span>':'')).join(''):'<p class="muted">一百二十九条都读过了。去复习，或者等卷下上线。</p>'}</div>
+  </section>
+  <section class="sec"><h2>到期复习 <small>${due.length?due.length+' 条':'今天没有'}</small></h2>
+    ${due.length?`<div class="today">${due.slice(0,3).map(n=>card(n,'<span class="pill due">待复习</span>')).join('')}</div><div class="btnrow" style="margin-top:12px"><a class="btn" href="#review">开始复习 ${due.length} 条</a></div>`
+      :`<p class="muted" style="margin:0">读完一条点「读完了」，它会在 1、3、7、16、35 天后回来考你一次。</p>`}
+  </section>
+  <section class="sec"><h2>卷首</h2><div class="today">
+    <a class="card" href="#intro"><span class="no">序</span><span class="tt"><b>徐爱引言</b><span>先生于《大学》格物诸说，悉以旧本为正…</span></span></a>
+    <a class="card" href="#ba"><span class="no">跋</span><span class="tt"><b>徐爱跋</b><span>爱因旧说汩没，始闻先生之教…</span></span></a>
+  </div></section>`;
+}
+function vToc(){
+  return `<section class="sec"><h2>目录 <small>卷上 · 一百二十九条</small></h2>
+  ${RECS.map(([name,a,b])=>`<div class="rec"><h3>${name} <span class="muted" style="font-size:.85rem">第 ${a}–${b} 条</span></h3><div class="grid">${
+    E.filter(e=>e.n>=a&&e.n<=b).map(e=>`<a class="cell${P[e.n]?' read':''}${KEY.has(e.n)?' key':''}" href="#e${e.n}" title="${esc(e.t)}">${e.n}</a>`).join('')
+  }</div></div>`).join('')}
+  <div class="legend"><span><i style="background:var(--qing-soft)"></i>已读</span><span><i style="background:var(--zhu);border-radius:50%;width:7px;height:7px"></i>附反方驳论</span></div></section>`;
+}
+function vEntry(n){
+  const e=BYN[n]; if(!e) return vHome();
+  const pv=BYN[n-1], nx=BYN[n+1], r=P[n];
+  return `<article class="leaf">
+    <div class="eyebrow">${recOf(n)} · 第 ${n} 条 / 129</div>
+    <div class="ehead"><span class="big">${n}</span><h1>${esc(e.t)}</h1>${r?'<span class="stamp">已读</span>':''}</div>
+    <div class="yw">${paras(e.yw)}</div>
+    <section class="blk bhblk"><h2>白话</h2><div class="bh">${paras(e.bh)}</div></section>
+    ${S.bh==='0'?`<div class="actions"><button class="btn ghost" id="showBh">看白话</button></div>`:''}
+    ${e.zs&&e.zs.length?`<section class="blk"><h2>注释</h2><ul class="zs">${e.zs.map(([k,v])=>`<li><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></li>`).join('')}</ul></section>`:''}
+    ${e.yong?`<section class="blk"><h2>今天怎么用</h2><div class="yong">${esc(e.yong)}</div></section>`:''}
+    ${e.con?`<section class="blk con"><h2>反方怎么驳</h2><div class="txt">${esc(e.con)}</div></section>`:''}
+    <section class="blk"><h2>自测</h2><button class="flip" id="flip" aria-expanded="false"><div class="q">${esc(e.q)}</div><div class="a" hidden>${esc(e.a)}</div><div class="hint">先自己答，再点开看</div></button></section>
+    ${e.gl.length?`<section class="blk"><h2>参看</h2><div class="links">${e.gl.map(g=>`<a href="#e${g}">${g} · ${esc(BYN[g].t)}</a>`).join('')}</div></section>`:''}
+    <section class="blk kj"><h2>校勘</h2><details class="kjd"${e.kj.length?'':' open'}><summary>与底本相比改动 ${e.kj.length} 处</summary><div style="margin-top:8px">${kjHtml(e.kj)}</div></details></section>
+    <div class="actions">${r?`<button class="btn ghost" id="unread">取消已读</button><span class="muted" style="font-size:.85rem">下次复习：${new Date(r.d).toLocaleDateString('zh-CN')}</span>`:`<button class="btn" id="read">读完了</button>`}</div>
+  </article>
+  <nav class="pager">${pv?`<a href="#e${pv.n}">← ${pv.n} ${esc(pv.t)}</a>`:'<a href="#ba">← 徐爱跋</a>'}${nx?`<a href="#e${nx.n}" style="text-align:right">${nx.n} ${esc(nx.t)} →</a>`:'<span></span>'}</nav>`;
+}
+function vFront(k){
+  const f=D.front[k];
+  return `<article class="leaf"><div class="eyebrow">卷首</div><div class="ehead"><h1>${esc(f.title)}</h1></div>
+    <div class="yw">${paras(f.yw)}</div>
+    <section class="blk bhblk"><h2>白话</h2><div class="bh">${paras(f.bh)}</div></section>
+    ${S.bh==='0'?`<div class="actions"><button class="btn ghost" id="showBh">看白话</button></div>`:''}
+    <section class="blk"><h2>注释</h2><ul class="zs">${f.zs.map(([a,b])=>`<li><span class="k">${esc(a)}</span><span class="v">${esc(b)}</span></li>`).join('')}</ul></section>
+    <section class="blk kj"><h2>校勘</h2><details class="kjd"><summary>与底本相比改动 ${f.kj.length} 处</summary><div style="margin-top:8px">${kjHtml(f.kj)}</div></details></section>
+  </article><nav class="pager">${k==='intro'?'<span></span><a href="#ba" style="text-align:right">徐爱跋 →</a>':'<a href="#intro">← 徐爱引言</a><a href="#e1" style="text-align:right">1 亲民还是新民 →</a>'}</nav>`;
+}
+let lastQ = load('q','');
+function vSearch(){
+  return `<section class="sec search"><h2>搜索 <small>原文、白话、注释、标题</small></h2>
+    <label for="q" class="muted" style="font-size:.85rem">输入关键词，比如「良知」「事上磨」「种树」</label>
+    <input id="q" type="search" autocomplete="off" value="${esc(lastQ)}" placeholder="搜点什么">
+    <div class="res" id="res"></div></section>`;
+}
+function doSearch(q){
+  lastQ=q; save('q',q);
+  const box=$('#res'); if(!box) return;
+  q=q.trim(); if(!q){box.innerHTML='<p class="muted">共 129 条可搜。</p>';return}
+  const hits=[];
+  for(const e of E){
+    const zs=(e.zs||[]).map(z=>z.join('：')).join('；');
+    const hay=[['原文',e.yw],['白话',e.bh],['注释',zs],['标题',e.t]];
+    for(const [lab,t] of hay){const i=t.indexOf(q);if(i>=0){hits.push([e,lab,t,i]);break}}
+  }
+  const hl=s=>esc(s).split(esc(q)).join('<mark>'+esc(q)+'</mark>');
+  box.innerHTML = `<p class="muted" style="margin:0">找到 ${hits.length} 条</p>`+hits.map(([e,lab,t,i])=>{
+    const s=Math.max(0,i-18), frag=(s?'…':'')+t.slice(s,i+q.length+30).replace(/\n/g,' ')+'…';
+    return `<a href="#e${e.n}"><b>${e.n} · ${esc(e.t)}</b> <span class="pill">${lab}</span><div class="snip">${hl(frag)}</div></a>`}).join('');
+}
+let rvQueue=[], rvShow=false;
+function vReview(){
+  if(!rvQueue.length) rvQueue=dueList();
+  if(!rvQueue.length) return `<section class="sec"><h2>复习</h2><p class="muted">今天没有到期的条目。读完新的条目后，它们会按 1、3、7、16、35 天的间隔回来。</p><a class="btn" href="#home">回首页</a></section>`;
+  const n=rvQueue[0], e=BYN[n];
+  return `<div class="rv"><div class="eyebrow">复习 · 还剩 ${rvQueue.length} 条 · 第 ${n} 条「${esc(e.t)}」</div>
+    <div class="q">${esc(e.q)}</div>
+    ${rvShow?`<div class="a">${esc(e.a)}</div><div class="btnrow" style="margin-top:16px"><button class="btn" id="ok">记得</button><button class="btn ghost" id="ng">忘了，明天再来</button><a class="btn ghost" href="#e${n}">回看原文</a></div>`
+      :`<div class="btnrow"><button class="btn" id="reveal">看答案</button></div>`}
+  </div>`;
+}
+function vAbout(){
+  const kjT=D.kjTotal;
+  return `<section class="sec prose"><h2>关于这个译注本</h2>
+  <p>这是王阳明《传习录》卷上的白话译注阅读站，包括徐爱引言、徐爱跋和正文 129 条，按陈荣捷《王阳明传习录详注集评》的编号排列。</p>
+  <h2>底本与校勘</h2>
+  <p>原文取自殆知阁古籍库的公版电子文本。这个底本是 OCR 识读的，错字很多，例如「心即理也」被识成「心即埋也」，「伏羲画卦」成了「伏义昼卦」。整理时依通行本逐条改正，全卷共改 ${kjT} 处。</p>
+  <p>每一处改动都是程序把成稿和底本逐字比对后自动列出的，挂在每条末尾的「校勘」里，没有不留记录的改动。比对只看汉字，不计标点。</p>
+  <p>校改依据的是整理者对通行本的了解，没有逐字对照纸本。如果要引用，请用陈荣捷《详注集评》或邓艾民《传习录注疏》核对。</p>
+  <h2>白话、注释和反方</h2>
+  <p>白话以直译为主，个别长条（如第 11 条）分段意译。注释说明人名、典故和术语。「反方怎么驳」选了 ${KEY.size} 条争议较大的条目，列出朱子学者、清代考据家或现代心理学可能提出的质疑，好让你读的时候不只是点头。</p>
+  <p>白话、注释、反方、自测题和「今天怎么用」都由 AI 撰写，不是出版译本。</p>
+  <h2>阅读进度保存在哪</h2>
+  <p>已读记录、复习日程和设置只存在这台设备的浏览器里，不上传。电脑和手机的进度不相通；清除浏览器数据会丢失进度。</p>
+  <h2>离线阅读</h2>
+  <p>部署到自己的域名后，第一次打开会把全书缓存下来，之后没网也能打开。手机浏览器里选「添加到主屏幕」，用起来就像一个 App。</p>
+  <h2>接下来</h2>
+  <p>卷下（陈九川、黄直、黄修易、黄省曾、钱德洪等录）和卷中（书信）会按同样体例陆续加入。</p>
+  </section>`;
+}
+
+/* —— 路由 —— */
+function route(){
+  const h=(location.hash||'#home').slice(1);
+  let html, m;
+  if((m=h.match(/^e(\d+)$/))) html=vEntry(+m[1]);
+  else if(h==='toc') html=vToc();
+  else if(h==='search') html=vSearch();
+  else if(h==='review') html=vReview();
+  else if(h==='about') html=vAbout();
+  else if(h==='intro'||h==='ba') html=vFront(h);
+  else html=vHome();
+  $('#app').innerHTML=html;
+  if(h!=='review'){rvQueue=[];rvShow=false}
+  bind(h,m);
+  window.scrollTo(0,0);
+  save('last',h);
+}
+function bind(h,m){
+  const f=$('#flip'); if(f) f.addEventListener('click',()=>{const a=f.querySelector('.a'),hi=f.querySelector('.hint');a.hidden=!a.hidden;hi.hidden=!a.hidden;f.setAttribute('aria-expanded',String(!a.hidden))});
+  const sb=$('#showBh'); if(sb) sb.addEventListener('click',()=>{document.querySelectorAll('.bhblk').forEach(x=>x.style.display='block');sb.remove()});
+  if(m){const n=+m[1];
+    const r=$('#read'); if(r) r.addEventListener('click',()=>{markRead(n);route();});
+    const u=$('#unread'); if(u) u.addEventListener('click',()=>{unmark(n);route();});
+  }
+  if(h==='search'){const q=$('#q');doSearch(q.value);q.addEventListener('input',()=>doSearch(q.value));q.focus({preventScroll:true});}
+  if(h==='review'){
+    const rv=$('#reveal'); if(rv) rv.addEventListener('click',()=>{rvShow=true;$('#app').innerHTML=vReview();bind('review')});
+    const ok=$('#ok'),ng=$('#ng');
+    const step=good=>{grade(rvQueue[0],good);rvQueue.shift();rvShow=false;if(!rvQueue.length)rvQueue=[-1];$('#app').innerHTML=rvQueue[0]===-1?`<section class="sec"><h2>今天复习完了</h2><p class="muted">答不上来的，明天会再来。</p><a class="btn" href="#home">回首页</a></section>`:vReview();bind('review')};
+    if(ok) ok.addEventListener('click',()=>step(true)); if(ng) ng.addEventListener('click',()=>step(false));
+  }
+}
+document.addEventListener('keydown',ev=>{
+  if(ev.target.closest('input,textarea')) return;
+  const m=(location.hash||'').match(/^#e(\d+)$/); if(!m) return;
+  const n=+m[1];
+  if(ev.key==='ArrowRight'&&BYN[n+1]) location.hash='e'+(n+1);
+  if(ev.key==='ArrowLeft'&&BYN[n-1]) location.hash='e'+(n-1);
+});
+window.addEventListener('hashchange',route);
+applySettings();
+if(!location.hash){const last=load('last','');if(last&&last!=='home')history.replaceState(null,'','#'+last);}
+route();
+if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+</script>

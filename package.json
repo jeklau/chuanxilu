@@ -1,0 +1,14 @@
+{
+  "name": "chuanxilu",
+  "private": true,
+  "description": "王阳明《传习录》白话译注阅读站",
+  "scripts": {
+    "check": "python3 tools/check.py",
+    "build": "python3 tools/build_data.py && python3 tools/build_site.py",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}
